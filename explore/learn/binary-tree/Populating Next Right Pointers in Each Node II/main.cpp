@@ -113,7 +113,3 @@ int main() {
   delete root;
   return 0;
 }
-/*
-15
-2 1 3 0 7 9 1 2 null 1 0 null null 8 8
-*/
