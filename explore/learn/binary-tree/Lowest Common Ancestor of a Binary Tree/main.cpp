@@ -29,7 +29,7 @@ public:
     if (result) {
       return {};
     }
-
+    
     std::unordered_set<int> root_set;
     for (int val : left_set) {
       root_set.insert(val);
@@ -37,8 +37,11 @@ public:
     for (int val : right_set) {
       root_set.insert(val);
     }
-    root_set.insert(root->val);
-
+    
+    if (root->val == p->val || root->val == q->val) {
+      root_set.insert(root->val);
+    }
+    
     if (root_set.count(p->val) && root_set.count(q->val)) {
       result = root;
     }
