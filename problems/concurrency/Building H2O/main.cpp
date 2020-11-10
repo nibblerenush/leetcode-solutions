@@ -45,14 +45,12 @@ private:
 };
 
 void hydrogen_thread(H2O& h2o, int n) {
-  //h2o.hydrogen([](){ std::cout << 'H'; });
   for (int i = 0; i < 2 * n; ++i) {
     h2o.hydrogen([](){ std::cerr << 'H'; });
   }
 }
 
 void oxygen_thread(H2O& h2o, int n) {
-  //h2o.oxygen([](){ std::cout << 'O'; });
   for (int i = 0; i < n; ++i) {
     h2o.oxygen([](){ std::cerr << 'O'; });
   }
