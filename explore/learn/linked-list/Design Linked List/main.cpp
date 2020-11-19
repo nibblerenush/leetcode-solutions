@@ -15,6 +15,16 @@ public:
   MyLinkedList() : m_head(nullptr), m_tail(nullptr), m_size(0)
   {}
 
+  ~MyLinkedList() {
+    Node* cur_node = m_head;
+
+    while (cur_node) {
+      Node* prev_node = cur_node;
+      cur_node = cur_node->next;
+      delete prev_node;
+    }
+  }
+
   int get(int index) {
     if (index < 0) {
       return -1;
