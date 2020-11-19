@@ -8,7 +8,7 @@
 
 class DiningPhilosophers {
 public:
-  std::vector<std::pair<int, int>> philosopher_forks = {
+  const std::vector<std::pair<int, int>> philosopher_forks = {
     {0, 4},
     {1, 0},
     {2, 1},
@@ -31,35 +31,25 @@ public:
     std::function<void()> putRightFork)
   {
     const auto& forks = philosopher_forks[philosopher];
-    {
-      std::unique_lock<std::mutex> lock(m);
-      forks_cv[forks.first].wait(lock, [this, &forks]() { return !forks_picked[forks.first]; });
-      forks_picked[forks.first] = true;
-      pickLeftFork();
-    }
-
-    {
-      std::unique_lock<std::mutex> lock(m);
-      forks_cv[forks.second].wait(lock, [this, &forks]() { return !forks_picked[forks.second]; });
-      forks_picked[forks.second] = true;
-      pickRightFork();
-    }
-
+    pickFork(forks.first, pickLeftFork);
+    pickFork(forks.second, pickRightFork);
     eat();
-
-    {
-      std::unique_lock<std::mutex> lock(m);
-      forks_picked[forks.first] = false;
-      putLeftFork();
-      forks_cv[forks.first].notify_one();
-    }
-
-    {
-      std::unique_lock<std::mutex> lock(m);
-      forks_picked[forks.second] = false;
-      putRightFork();
-      forks_cv[forks.second].notify_one();
-    }
+    putFork(forks.first, putLeftFork);
+    putFork(forks.second, putRightFork);
+  }
+  
+  void pickFork(int fork_number, std::function<void()> pickForkMove) {
+    std::unique_lock<std::mutex> lock(m);
+    forks_cv[fork_number].wait(lock, [this, fork_number]() { return !forks_picked[fork_number]; });
+    forks_picked[fork_number] = true;
+    pickForkMove();
+  }
+  
+  void putFork(int fork_number, std::function<void()> putForkMove) {
+    std::unique_lock<std::mutex> lock(m);
+    forks_picked[fork_number] = false;
+    putForkMove();
+    forks_cv[fork_number].notify_one();
   }
 };
 
@@ -88,23 +78,26 @@ void philosopher_thread(DiningPhilosophers& dining_philosophers, int n) {
   }
 }
 
+template <int N>
+void run_thread(std::vector<std::future<void>>& threads, DiningPhilosophers& dp, int n) {
+  threads.push_back(std::async(std::launch::async, &philosopher_thread<N - 1>, std::ref(dp), n));
+  run_thread<N - 1>(threads, dp, n);
+}
+
+template <>
+void run_thread<0>(std::vector<std::future<void>>&, DiningPhilosophers&, int) {}
+
 int main() {
   int n = 0;
   std::cin >> n;
   
   DiningPhilosophers dp;
-  auto philosopher0 = std::async(std::launch::async, &philosopher_thread<0>, std::ref(dp), n);
-  auto philosopher1 = std::async(std::launch::async, &philosopher_thread<1>, std::ref(dp), n);
-  auto philosopher2 = std::async(std::launch::async, &philosopher_thread<2>, std::ref(dp), n);
-  auto philosopher3 = std::async(std::launch::async, &philosopher_thread<3>, std::ref(dp), n);
-  auto philosopher4 = std::async(std::launch::async, &philosopher_thread<4>, std::ref(dp), n);
-  
-  philosopher0.get();
-  philosopher1.get();
-  philosopher2.get();
-  philosopher3.get();
-  philosopher4.get();
+  std::vector<std::future<void>> threads;
+  run_thread<5>(threads, dp, n);
 
+  for (auto& thread : threads) {
+    thread.get();
+  }
   std::cout << std::endl;
   return 0;
 }
