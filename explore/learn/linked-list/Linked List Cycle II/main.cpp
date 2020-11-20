@@ -88,10 +88,3 @@ int main() {
   std::cout << solution.detectCycle(head)->val << std::endl;
   return 0;
 }
-
-
-/*
-1
-4
-3 2 0 -4
-*/
