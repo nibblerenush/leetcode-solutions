@@ -18,9 +18,9 @@ public:
   
   std::vector<bool> forks_picked;
   mutable std::vector<std::condition_variable> forks_cv;
-  mutable std::mutex m;
+  mutable std::vector<std::mutex> forks_m;
   
-  DiningPhilosophers() : forks_picked(5, false), forks_cv(5)
+  DiningPhilosophers() : forks_picked(5, false), forks_cv(5), forks_m(5)
   {}
   
   void wantsToEat(int philosopher,
@@ -39,14 +39,14 @@ public:
   }
   
   void pickFork(int fork_number, std::function<void()> pickForkMove) {
-    std::unique_lock<std::mutex> lock(m);
+    std::unique_lock<std::mutex> lock(forks_m[fork_number]);
     forks_cv[fork_number].wait(lock, [this, fork_number]() { return !forks_picked[fork_number]; });
     forks_picked[fork_number] = true;
     pickForkMove();
   }
   
   void putFork(int fork_number, std::function<void()> putForkMove) {
-    std::unique_lock<std::mutex> lock(m);
+    std::unique_lock<std::mutex> lock(forks_m[fork_number]);
     forks_picked[fork_number] = false;
     putForkMove();
     forks_cv[fork_number].notify_one();
