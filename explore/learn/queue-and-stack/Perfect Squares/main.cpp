@@ -5,7 +5,7 @@
 class Solution {
 public:
   int numSquares(int n) {
-    int result = std::numeric_limits<int>::max();
+    int result = 0;
     
     std::queue<std::pair<int, int>> work_queue;
     work_queue.push({ n, 0 });
@@ -19,11 +19,13 @@ public:
       work_queue.pop();
       
       if (remain == 0) {
-        result = std::min(result, step);
+        result = step;
+        break;
       }
       
       for (int i = 1; i * i <= remain; ++i) {
         int new_remain = remain - i * i;
+
         if (!visited[new_remain]) {
           work_queue.push({ new_remain, step + 1 });
           visited[new_remain] = true;
