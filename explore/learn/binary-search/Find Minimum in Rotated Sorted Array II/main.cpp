@@ -86,7 +86,7 @@ private:
 };
 
 int main() {
-  int n;
+  int n = 0;
   cin >> n;
 
   vector<int> nums(n);
