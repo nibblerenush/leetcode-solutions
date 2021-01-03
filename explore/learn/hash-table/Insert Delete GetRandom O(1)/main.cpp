@@ -15,8 +15,8 @@ using namespace std;
 class RandomizedSet {
 public:
   /** Initialize your data structure here. */
-  RandomizedSet() : m_table(1000, list<int>{}), m_size(m_table.size()) {
-    srand(time(NULL));
+  RandomizedSet() : m_table(1000, list<int>{}), m_cur_size(0), m_size(m_table.size()) {
+    srand(time(nullptr));
   }
   
   /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
@@ -45,16 +45,37 @@ public:
   
   /** Get a random element from the set. */
   int getRandom() {
+    int v_idx = rand() % m_cur_size;
+    const auto* bucket = &m_table[v_idx];
     
-    const auto& bucket = m_table[rand() % m_size];
+    if (bucket->empty()) {
+      int left = v_idx - 1;
+      int right = v_idx + 1;
+      
+      while (true) {
+        if (left >= 0) {
+          bucket = &m_table[left--];
+          if (!bucket->empty()) { break; }
+        }
 
+        if (right < m_size) {
+          bucket = &m_table[right++];
+          if (!bucket->empty()) { break; }
+        }
+      }
+    }
 
-    
+    int b_size = bucket->size();
+    int b_idx = rand() % b_size;
+    auto iter = next(bucket->begin(), b_idx);
+    return *iter;
   }
 
 private:
   list<int>& GetBucket(int key) {
-    return m_table[key % m_size];
+    int v_idx = abs(key) % m_size;
+    m_cur_size = max(m_cur_size, v_idx + 1);
+    return m_table[v_idx];
   }
   
   list<int>::iterator FindElement(int key) {
@@ -64,9 +85,24 @@ private:
 
 private:
   vector<list<int>> m_table;
+  int m_cur_size;
   int m_size;
 };
 
 int main() {
+  RandomizedSet randomizedSet;
+
+  randomizedSet.insert(1);
+  randomizedSet.insert(10);
+  randomizedSet.insert(20);
+  randomizedSet.insert(30);
+
+  cout << randomizedSet.getRandom() << endl;
+  cout << randomizedSet.getRandom() << endl;
+  cout << randomizedSet.getRandom() << endl;
+  cout << randomizedSet.getRandom() << endl;
+  cout << randomizedSet.getRandom() << endl;
+  cout << randomizedSet.getRandom() << endl;
+
   return 0;
 }
