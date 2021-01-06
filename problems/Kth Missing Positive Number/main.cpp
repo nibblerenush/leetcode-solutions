@@ -24,20 +24,14 @@ public:
       if (arr[i] == cur_num) {
         ++i;
       }
-      else {
-        ++miss_count;
-      }
-      
-      if (miss_count == k) {
+      else if (++miss_count == k) {
         return cur_num;
       }
     }
     
-    while (miss_count != k) {
+    while (miss_count++ != k) {
       ++cur_num;
-      ++miss_count;
     }
-    
     return cur_num;
   }
 };
