@@ -21,35 +21,27 @@ struct TreeNode {
 class Solution {
 public:
   TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
-    string path;
-    traverse(original, target, "", path);
-    
-    TreeNode* result = cloned;
-    for (char c : path) {
-      if (c == 'l') {
-        result = result->left;
-      }
-      else {
-        result = result->right;
-      }
-    }
+    traverse(original, cloned, target);
     return result;
   }
 
 private:
-  void traverse(TreeNode* root, TreeNode* target, string path, string& result_path) {
-    if (!root || !result_path.empty()) {
-      return;
-    }
-    
-    if (root == target) {
-      result_path = move(path);
+  void traverse(TreeNode* original, TreeNode* cloned, TreeNode* target) {
+    if (!original || result) {
       return;
     }
 
-    traverse(root->left, target, path + 'l', result_path);
-    traverse(root->right, target, path + 'r', result_path);
+    if (original == target) {
+      result = cloned;
+      return;
+    }
+
+    traverse(original->left, cloned->left, target);
+    traverse(original->right, cloned->right, target);
   }
+
+private:
+  TreeNode* result = nullptr;
 };
 
 int main() {

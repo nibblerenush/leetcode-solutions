@@ -46,7 +46,5 @@ private:
 };
 
 int main() {
-  Solution solution;
-  cout << solution.countArrangement(10) << endl;
   return 0;
 }
