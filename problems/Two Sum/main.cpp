@@ -1,9 +1,12 @@
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <limits>
 #include <map>
 #include <numeric>
+#include <queue>
 #include <set>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -14,39 +17,38 @@ using namespace std;
 class Solution {
 public:
   vector<int> twoSum(vector<int>& nums, int target) {
-    int size = nums.size();
-    unordered_map<int, unordered_set<int>> hashmap;
+    unordered_map<int, vector<int>> num_indexes;
+    for (int i = 0; i < (int)nums.size(); ++i) {
+      num_indexes[nums[i]].push_back(i);
+    }
     
-    for (int i = 0; i < size; ++i) {
-      hashmap[nums[i]].insert(i);
-    }
-
-    for (int i = 0; i < size; ++i) {
-      int temp = target - nums[i];
-      hashmap[nums[i]].erase(i);
-      if (!hashmap[temp].empty()) {
-        return { i, *hashmap[temp].begin() };
+    int num1 = 0;
+    int num2 = 0;
+    sort(nums.begin(), nums.end());
+    
+    for (int i = 0; i < (int)nums.size() - 1; ++i) {
+      int num = target - nums[i];
+      if (binary_search(nums.begin() + i + 1, nums.end(), num)) {
+        num1 = nums[i];
+        num2 = *lower_bound(nums.begin() + i + 1, nums.end(), num);
+        break;
       }
-      hashmap[nums[i]].insert(i);
     }
-
-    return {};
+    
+    vector<int> result;
+    if (num1 == num2) {
+      result.push_back(num_indexes[num1][0]);
+      result.push_back(num_indexes[num1][1]);
+    }
+    else {
+      result.push_back(num_indexes[num1][0]);
+      result.push_back(num_indexes[num2][0]);
+    }
+    
+    return result;
   }
 };
 
 int main() {
-  int target, n;
-  cin >> target >> n;
-
-  vector<int> nums(n);
-  for (auto& num : nums) {
-    cin >> num;
-  }
-
-  Solution solution;
-  for (const auto& index : solution.twoSum(nums, target)) {
-    cout << index << ' ';
-  }
-  cout << endl;
   return 0;
 }
