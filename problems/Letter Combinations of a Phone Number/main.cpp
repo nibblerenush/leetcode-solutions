@@ -1,4 +1,12 @@
+#include <algorithm>
+#include <cmath>
 #include <iostream>
+#include <limits>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -14,9 +22,9 @@ public:
     }
     size = digits.size();
 
-    vector<string> combinations;
-    backtrack(digits, 0, combinations);
-    return combinations;
+    vector<string> result;
+    backtrack(digits, 0, result);
+    return result;
   }
 
 private:
@@ -50,13 +58,5 @@ private:
 };
 
 int main() {
-  string digits;
-  cin >> digits;
-
-  Solution solution;
-  auto combinations = solution.letterCombinations(digits);
-  for (const auto& combination : combinations) {
-    cout << combination << '\n';
-  }
   return 0;
 }
