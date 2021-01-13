@@ -30,7 +30,7 @@ public:
       int num = target - nums[i];
       if (binary_search(nums.begin() + i + 1, nums.end(), num)) {
         num1 = nums[i];
-        num2 = *lower_bound(nums.begin() + i + 1, nums.end(), num);
+        num2 = num;
         break;
       }
     }
