@@ -1,6 +1,18 @@
+#include <algorithm>
+#include <cmath>
 #include <iostream>
+#include <limits>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
 #include <unordered_map>
-#include <utility>
+#include <unordered_set>
+#include <vector>
+
+using namespace std;
 
 class Node {
 public:
@@ -22,24 +34,24 @@ public:
       return nullptr;
     }
     
-    Node* result = nullptr;
+    Node* result_head = nullptr;
     Node* cur_node_old = head;
-    Node* cur_node_new = result;
-    std::unordered_map<Node*, Node*> old_new;
-
+    Node* cur_node_new = result_head;
+    unordered_map<Node*, Node*> old_new;
+    
     while (cur_node_old) {
-      if (result) {
+      if (result_head) {
         cur_node_new->next = new Node(cur_node_old->val);
         cur_node_new = cur_node_new->next;
       }
       else {
-        result = new Node(cur_node_old->val);
-        cur_node_new = result;
+        result_head = new Node(cur_node_old->val);
+        cur_node_new = result_head;
       }
       old_new.emplace(cur_node_old, cur_node_new);
       cur_node_old = cur_node_old->next;
     }
-
+    
     cur_node_old = head;
     while (cur_node_old) {
       Node* new_node = old_new[cur_node_old];
@@ -47,38 +59,11 @@ public:
       new_node->random = randow_new_node;
       cur_node_old = cur_node_old->next;
     }
-
-    return result;
+    
+    return result_head;
   }
 };
 
-void Delete(Node* head) {
-  while (head) {
-    Node* next = head->next;
-    delete head;
-    head = next;
-  }
-}
-
-void PrintLinkedList(Node* head) {
-  while (head) {
-    std::cout << head->val << ' ';
-    head = head->next;
-  }
-  std::cout << std::endl;
-}
-
 int main() {
-  Node* head = new Node(3);
-  head->next = new Node(3);
-  head->next->next = new Node(3);
-  head->next->random = head;
-    
-  Solution solution;
-  Node* result = solution.copyRandomList(head);
-  PrintLinkedList(result);
-
-  Delete(head);
-  Delete(result);
   return 0;
 }
