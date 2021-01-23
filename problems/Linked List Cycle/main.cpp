@@ -36,12 +36,7 @@ public:
       }
       
       slow_runner = slow_runner->next;
-      if (fast_runner->next) {
-        fast_runner = fast_runner->next->next;
-      }
-      else {
-        fast_runner = fast_runner->next;
-      }
+      fast_runner = fast_runner->next ? fast_runner->next->next : nullptr;
     }
     
     return false;
