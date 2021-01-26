@@ -25,41 +25,30 @@ class Solution {
 public:
   TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
     TreeNode* result = nullptr;
-    traversal(root, p, q, result);
+    traversal(root, p, q, &result);
     return result;
   }
 
 private:
-  unordered_set<int> traversal(TreeNode* root, TreeNode* p, TreeNode* q, TreeNode*& result) {
+  int traversal(TreeNode* root, TreeNode* p, TreeNode* q, TreeNode** result) {
     if (!root) {
-      return {};
+      return 0;
     }
     
-    auto left_set = traversal(root->left, p, q, result);
-    auto right_set = traversal(root->right, p, q, result);
+    int left_num = traversal(root->left, p, q, result);
+    int right_num = traversal(root->right, p, q, result);
     
-    if (result) {
-      return {};
+    if (*result) {
+      return 0;
     }
     
-    unordered_set<int> root_set;
-    for (int val : left_set) {
-      root_set.insert(val);
-    }
-    for (int val : right_set) {
-      root_set.insert(val);
+    int num = (root == p || root == q ? 1 : 0) + left_num + right_num;
+    if (num == 2) {
+      *result = root;
     }
     
-    if (root->val == p->val || root->val == q->val) {
-      root_set.insert(root->val);
-    }
-    
-    if (root_set.count(p->val) && root_set.count(q->val)) {
-      result = root;
-    }
-    
-    return root_set;
-  }  
+    return num;
+  }
 };
 
 int main() {
