@@ -18,52 +18,30 @@ class Solution {
 public:
   int minimumEffortPath(vector<vector<int>>& heights) {
     int left = 0;
-    int right = 999'999;
+    int right = 1'000'000;
     
-    while (left + 1 < right) {
+    while (left < right) {
       int mid = left + (right - left) / 2;
-      pair<bool, bool> check = check_threshold(heights, mid);
       
-      if (check.first && !check.second) {
-        return mid;
-      }
-      else if (check.first && check.second) {
+      if (check_threshold(heights, mid)) {
         right = mid;
       }
       else {
-        left = mid;
+        left = mid + 1;
       }
     }
     
-    pair<bool, bool> check = check_threshold(heights, left);
-    if (check.first && !check.second) {
-      return left;
-    }
-    
-    check = check_threshold(heights, right);
-    if (check.first && !check.second) {
-      return right;
-    }
-    
-    return -1;
+    return left;
   }
 
 private:
-  pair<bool, bool> check_threshold(const vector<vector<int>>& heights, int k) {
+  bool check_threshold(const vector<vector<int>>& heights, int k) {
     const int m = heights.size();
     const int n = heights[0].size();
     
-    pair<bool, bool> result;
-    
     vector<vector<bool>> visited(m, vector<bool>(n, false));
     dfs(heights, heights[0][0], 0, 0, k, visited);
-    result.first = visited[m - 1][n - 1];
-    
-    visited.assign(m, vector<bool>(n, false));
-    dfs(heights, heights[0][0], 0, 0, k - 1, visited);
-    result.second = visited[m - 1][n - 1];
-    
-    return result;
+    return visited[m - 1][n - 1];
   }
   
   void dfs(const vector<vector<int>>& heights, int height, int i, int j, int k, vector<vector<bool>>& visited) {
