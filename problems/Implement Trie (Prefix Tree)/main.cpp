@@ -61,7 +61,7 @@ private:
       cur_node = cur_node->children[c];
     }
     
-    // 
+    // end_node
     return cur_node;
   }
 
