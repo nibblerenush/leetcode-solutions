@@ -17,10 +17,12 @@ using namespace std;
 class Solution {
 public:
   int coinChange(vector<int>& coins, int amount) {
+    // queue
     queue<int> work_queue;
     work_queue.push(amount);
     
-    vector<int> memorization(amount + 1, 0);
+    // memorization
+    unordered_map<int, int> memorization;
     
     while (!work_queue.empty()) {
       int remain = work_queue.front();
@@ -31,7 +33,7 @@ public:
       }
       else {
         for (int coin_value : coins) {
-          if (remain - coin_value >= 0 && !memorization[remain - coin_value]) {
+          if (remain - coin_value >= 0 && !memorization.count(remain - coin_value)) {
             work_queue.push(remain - coin_value);
             memorization[remain - coin_value] = memorization[remain] + 1;
           }
