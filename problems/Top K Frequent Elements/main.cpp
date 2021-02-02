@@ -1,9 +1,12 @@
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <limits>
 #include <map>
 #include <numeric>
+#include <queue>
 #include <set>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -32,22 +35,17 @@ public:
       if (count_num.count(cur_count)) {
         for (int num : count_num[cur_count]) {
           result.push_back(num);
-          if (static_cast<int>(result.size()) == k) {
+          if ((int)result.size() == k) {
             return result;
           }
         }
       }
     }
-
+    
     return {};
   }
 };
 
 int main() {
-  //vector<int> nums = { 1, 1, 1, 2, 2, 3 };
-  vector<int> nums = { 1, 2, 3, 4, 5 };
-
-  Solution solution;
-  auto result = solution.topKFrequent(nums, 4);
   return 0;
 }
