@@ -17,7 +17,7 @@ using namespace std;
 class Solution {
 public:
   string simplifyPath(string path) {
-    // size_t to 
+    // size_t to int
     const int length = path.length();
     
     // init
