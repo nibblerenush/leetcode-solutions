@@ -37,7 +37,7 @@ private:
       return;
     }
     
-    // with cur 
+    // with cur root
     calc_pathsum(root, 0);
     
     // with new roots
