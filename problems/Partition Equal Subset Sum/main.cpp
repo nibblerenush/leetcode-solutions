@@ -20,7 +20,7 @@ public:
     // size_t to int
     const int size = nums.size();
     
-    // calc
+    // calc all_sum
     int all_sum = accumulate(nums.begin(), nums.end(), 0);
     if (all_sum % 2 != 0) {
       return false;
