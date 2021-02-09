@@ -19,7 +19,7 @@ public:
   int leastInterval(vector<char>& tasks, int n) {
     // prepare
     const int size = 26;
-    vector<int> task_count(size);
+    vector<int> task_count(size, 0);
     for (char task : tasks) {
       task_count[task - 'A'] += 1;
     }
