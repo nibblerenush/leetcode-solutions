@@ -39,7 +39,7 @@ public:
         // most freq task
         if (task_count[i] == task_count[size - 1]) {
           result += 1;
-          gap -= (task_count[size - 1] - 1);
+          gap -= task_count[i] - 1;
         }
         // common task
         else {
