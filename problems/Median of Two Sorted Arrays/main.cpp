@@ -1,8 +1,12 @@
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <limits>
 #include <map>
+#include <numeric>
+#include <queue>
 #include <set>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -51,20 +55,5 @@ public:
 };
 
 int main() {
-  int m, n;
-  cin >> m >> n;
-  
-  vector<int> nums1(m);
-  for (auto& num : nums1) {
-    cin >> num;
-  }
-
-  vector<int> nums2(n);
-  for (auto& num : nums2) {
-    cin >> num;
-  }
-  
-  Solution solution;
-  cout << solution.findMedianSortedArrays(nums1, nums2) << endl;
   return 0;
 }
