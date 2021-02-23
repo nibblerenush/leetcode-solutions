@@ -1,9 +1,22 @@
+#include <algorithm>
+#include <cmath>
 #include <iostream>
+#include <limits>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <stack>
 #include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+
+using namespace std;
 
 class Solution {
 public:
-  int strStr(const std::string& haystack, const std::string& needle) {
+  int strStr(string haystack, string needle) {
     if (needle.empty()) {
       return 0;
     }
@@ -30,10 +43,5 @@ public:
 };
 
 int main() {
-  std::string haystack, needle;
-  std::cin >> haystack >> needle;
-
-  Solution solution;
-  std::cout << solution.strStr(haystack, needle) << std::endl;
   return 0;
 }
