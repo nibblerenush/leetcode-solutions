@@ -1,9 +1,12 @@
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <limits>
 #include <map>
 #include <numeric>
+#include <queue>
 #include <set>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -14,7 +17,7 @@ using namespace std;
 class Solution {
 public:
   bool isValidSudoku(vector<vector<char>>& board) {
-    int size = board.size();
+    const int size = board.size();
     for (int i = 0; i < size; ++i) {
       for (int j = 0; j < size; ++j) {
         if (board[i][j] != '.') {
@@ -42,19 +45,5 @@ private:
 };
 
 int main() {
-  vector<vector<char>> board = {
-    {'8', '3', '.', '.', '7', '.', '.', '.', '.'},
-    {'6', '.', '.', '1', '9', '5', '.', '.', '.'},
-    {'.', '9', '8', '.', '.', '.', '.', '6', '.'},
-    {'8', '.', '.', '.', '6', '.', '.', '.', '3'},
-    {'4', '.', '.', '8', '.', '3', '.', '.', '1'},
-    {'7', '.', '.', '.', '2', '.', '.', '.', '6'},
-    {'.', '6', '.', '.', '.', '.', '2', '8', '.'},
-    {'.', '.', '.', '4', '1', '9', '.', '.', '5'},
-    {'.', '.', '.', '.', '8', '.', '.', '7', '9'}
-  };
-
-  Solution solution;
-  cout << boolalpha << solution.isValidSudoku(board) << endl;
   return 0;
 }
