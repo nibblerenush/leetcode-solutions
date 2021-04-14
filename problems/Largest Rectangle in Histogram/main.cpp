@@ -1,5 +1,15 @@
 #include <algorithm>
+#include <cmath>
 #include <iostream>
+#include <limits>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 using namespace std;
@@ -22,12 +32,13 @@ private:
           min_height = heights[i];
         }
       }
-      
+
       int rectangle_area = min_height * (end - start + 1);
       int left_rectangle_area = divide_and_conquer(start, min_index - 1, heights);
       int right_rectangle_area = divide_and_conquer(min_index + 1, end, heights);
-      return std::max({ rectangle_area, left_rectangle_area, right_rectangle_area });
+      return max({ rectangle_area, left_rectangle_area, right_rectangle_area });
     }
+
     return 0;
   }
 
@@ -36,15 +47,5 @@ private:
 };
 
 int main() {
-  int n = 0;
-  std::cin >> n;
-  
-  vector<int> heights(n);
-  for (auto& height : heights) {
-    std::cin >> height;
-  }
-
-  Solution solution;
-  std::cout << solution.largestRectangleArea(heights) << std::endl;
   return 0;
 }
