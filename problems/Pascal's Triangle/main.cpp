@@ -1,15 +1,28 @@
+#include <algorithm>
+#include <cmath>
 #include <iostream>
+#include <limits>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
+
+using namespace std;
 
 class Solution {
 public:
-  std::vector<std::vector<int>> generate(int numRows) {
-    std::vector<std::vector<int>> result;
+  vector<vector<int>> generate(int numRows) {
+    vector<vector<int>> result;
     int prev_size = 0;
-    
+
     for (int i = 0; i < numRows; ++i) {
-      result.push_back(std::vector<int>{1});
-      
+      result.push_back(vector<int>{1});
+
       for (int j = 1; j <= prev_size; ++j) {
         if (j == prev_size) {
           result[i].push_back(1);
@@ -26,16 +39,5 @@ public:
 };
 
 int main() {
-  int numRows = 0;
-  std::cin >> numRows;
-  
-  Solution solution;
-  auto result = solution.generate(numRows);
-  for (const auto& row : result) {
-    for (auto num : row) {
-      std::cout << num << ' ';
-    }
-    std::cout << std::endl;
-  }
   return 0;
 }
