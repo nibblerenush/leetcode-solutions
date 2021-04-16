@@ -1,15 +1,19 @@
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <limits>
 #include <map>
 #include <numeric>
+#include <queue>
 #include <set>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
 using namespace std;
+
 
 struct TreeNode {
   int val;
@@ -18,21 +22,7 @@ struct TreeNode {
   TreeNode() : val(0), left(nullptr), right(nullptr) {}
   TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
   TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
-  ~TreeNode() {
-    delete left;
-    delete right;
-  }
 };
-
-void PrintInOrder(TreeNode* root) {
-  if (!root) {
-    return;
-  }
-
-  PrintInOrder(root->left);
-  cout << root->val << ' ';
-  PrintInOrder(root->right);
-}
 
 class Solution {
 public:
@@ -55,10 +45,5 @@ private:
 };
 
 int main() {
-  vector<int> nums = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-
-  Solution solution;
-  auto result = solution.sortedArrayToBST(nums);
-  PrintInOrder(result);
   return 0;
 }
