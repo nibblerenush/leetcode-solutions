@@ -1,8 +1,12 @@
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <limits>
 #include <map>
+#include <numeric>
+#include <queue>
 #include <set>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -53,15 +57,5 @@ private:
 };
 
 int main() {
-  int n;
-  cin >> n;
-
-  vector<int> nums(n);
-  for (auto& num : nums) {
-    cin >> num;
-  }
-
-  Solution solution;
-  cout << solution.findPeakElement(nums) << endl;
   return 0;
 }
