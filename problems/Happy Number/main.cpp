@@ -1,9 +1,12 @@
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <limits>
 #include <map>
 #include <numeric>
+#include <queue>
 #include <set>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -15,7 +18,7 @@ class Solution {
 public:
   bool isHappy(int n) {
     unordered_set<int> hashset;
-    
+
     while (true) {
       int digits_square_sum = get_digits_square_sum(n);
       if (digits_square_sum == 1) {
@@ -42,10 +45,5 @@ private:
 };
 
 int main() {
-  int n;
-  cin >> n;
-
-  Solution solution;
-  cout << boolalpha << solution.isHappy(n) << endl;
   return 0;
 }
