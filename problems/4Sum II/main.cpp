@@ -1,9 +1,12 @@
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <limits>
 #include <map>
 #include <numeric>
+#include <queue>
 #include <set>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -42,13 +45,5 @@ private:
 };
 
 int main() {
-  vector<int>
-    A = { 1, 2 },
-    B = { -2, -1 },
-    C = { -1, 2 },
-    D = { 0, 2 };
-
-  Solution solution;
-  cout << solution.fourSumCount(A, B, C, D) << endl;
   return 0;
 }
