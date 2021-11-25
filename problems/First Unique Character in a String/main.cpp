@@ -1,9 +1,12 @@
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <limits>
 #include <map>
 #include <numeric>
+#include <queue>
 #include <set>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -31,10 +34,5 @@ public:
 };
 
 int main() {
-  string s;
-  cin >> s;
-
-  Solution solution;
-  cout << solution.firstUniqChar(s) << endl;
   return 0;
 }
