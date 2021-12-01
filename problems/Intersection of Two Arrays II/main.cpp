@@ -1,8 +1,14 @@
 #include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <limits>
 #include <map>
+#include <numeric>
+#include <queue>
 #include <set>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -40,24 +46,5 @@ public:
 };
 
 int main() {
-  int n, m;
-  cin >> n >> m;
-
-  vector<int> nums1(n);
-  for (auto& num : nums1) {
-    cin >> num;
-  }
-
-  vector<int> nums2(m);
-  for (auto& num : nums2) {
-    cin >> num;
-  }
-  
-  Solution solution;
-  auto intersections = solution.intersect(nums1, nums2);
-  for (const auto& num : intersections) {
-    cout << num << ' ';
-  }
-  cout << endl;
   return 0;
 }
