@@ -1,27 +1,26 @@
+#include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
-#include <utility>
+#include <limits>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+
+using namespace std;
 
 struct ListNode {
   int val;
   ListNode* next;
   ListNode(int x) : val(x), next(NULL) {}
 };
-
-void Delete(ListNode* head) {
-  while (head) {
-    ListNode* next = head->next;
-    delete head;
-    head = next;
-  }
-}
-
-void PrintLinkedList(ListNode* head) {
-  while (head) {
-    std::cout << head->val << ' ';
-    head = head->next;
-  }
-  std::cout << std::endl;
-}
 
 class Solution {
 public:
@@ -61,30 +60,5 @@ public:
 };
 
 int main() {
-  int n = 0;
-  std::cin >> n;
-  
-  ListNode* head = nullptr;
-  ListNode* cur_node = nullptr;
-  
-  for (int i = 0; i < n; ++i) {
-    int val = 0;
-    std::cin >> val;
-    ListNode* new_node = new ListNode{ val };
-    
-    if (cur_node) {
-      cur_node->next = new_node;
-      cur_node = cur_node->next;
-    }
-    else {
-      cur_node = new_node;
-      head = cur_node;
-    }
-  }
-
-  Solution solution;
-  head = solution.oddEvenList(head);
-  PrintLinkedList(head);
-  Delete(head);
   return 0;
 }
