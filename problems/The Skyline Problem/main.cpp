@@ -1,5 +1,17 @@
 #include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
+#include <limits>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 using namespace std;
@@ -91,18 +103,5 @@ private:
 };
 
 int main() {
-  vector<vector<int>> buildings = {
-    {2, 9, 10},
-    {3, 7, 15},
-    {5, 12, 12},
-    {15, 20, 10},
-    {19, 24, 8}
-  };
-
-  Solution solution;
-  auto skyline = solution.getSkyline(buildings);
-  for (const auto& point : skyline) {
-    cout << "x = " << point[0] << " y = " << point[1] << '\n';
-  }
   return 0;
 }
