@@ -1,8 +1,14 @@
 #include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <limits>
 #include <map>
+#include <numeric>
+#include <queue>
 #include <set>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -10,10 +16,8 @@
 
 using namespace std;
 
-int bad;
-
 bool isBadVersion(int version) {
-  return version >= bad;
+  return false;
 }
 
 class Solution {
@@ -48,10 +52,5 @@ private:
 };
 
 int main() {
-  int n;
-  cin >> n >> bad;
-
-  Solution solution;
-  cout << solution.firstBadVersion(n) << endl;
   return 0;
 }
