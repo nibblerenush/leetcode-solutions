@@ -1,10 +1,25 @@
+#include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
+#include <limits>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <stack>
 #include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+
+using namespace std;
 
 class Solution {
 public:
-  std::string addBinary(std::string a, std::string b) {
-    std::string result;
+  string addBinary(string a, string b) {
+    string result;
     int a_idx = a.length() - 1;
     int b_idx = b.length() - 1;
     int temp = 0;
@@ -37,7 +52,7 @@ public:
       b_idx--;
     }
     
-    auto get_prefix = [&temp, &result](const std::string& s, int idx) {
+    auto get_prefix = [&temp, &result](const string& s, int idx) {
       while (idx >= 0) {
         int s_bit = s[idx] - '0';
         int r_bit = s_bit + temp;
@@ -67,16 +82,11 @@ public:
       result.push_back('1');
     }
 
-    std::reverse(result.begin(), result.end());
+    reverse(result.begin(), result.end());
     return result;
   }
 };
 
 int main() {
-  std::string a, b;
-  std::cin >> a >> b;
-
-  Solution solution;
-  std::cout << solution.addBinary(a, b) << std::endl;
   return 0;
 }
