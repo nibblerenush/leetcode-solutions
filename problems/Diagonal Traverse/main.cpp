@@ -1,5 +1,20 @@
+#include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
+#include <limits>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
+
+using namespace std;
 
 class Solution {
 public:
@@ -8,8 +23,8 @@ public:
     DOWN
   };
 
-  std::vector<int> findDiagonalOrder(std::vector<std::vector<int>>& matrix) {
-    std::vector<int> result;
+  vector<int> findDiagonalOrder(vector<vector<int>>& matrix) {
+    vector<int> result;
     if (matrix.empty()) {
       return result;
     }
@@ -65,22 +80,5 @@ public:
 };
 
 int main() {
-  int m = 0;
-  int n = 0;
-  std::cin >> m >> n;
-
-  std::vector<std::vector<int>> matrix(m, std::vector<int>(n, 0));
-  for (std::vector<int>& row : matrix) {
-    for (int& column : row) {
-      std::cin >> column;
-    }
-  }
-
-  Solution solution;
-  auto result = solution.findDiagonalOrder(matrix);
-  for (int num : result) {
-    std::cout << num << ' ';
-  }
-  std::cout << std::endl;
   return 0;
 }
