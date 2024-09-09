@@ -1,5 +1,7 @@
 #include <algorithm>
 #include <cmath>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <limits>
 #include <map>
@@ -16,11 +18,16 @@ using namespace std;
 
 class Solution {
 public:
-  void rotate(vector<int>& nums, int k) {
-    k = k % nums.size();
-    reverse(nums.begin(), nums.end());
-    reverse(nums.begin(), nums.begin() + k);
-    reverse(nums.begin() + k, nums.end());
+  int hIndex(vector<int>& citations) {
+    int result = 0;
+    sort(citations.begin(), citations.end());
+    const int size = citations.size();
+    
+    for (int i = 0; i < size; ++i) {
+      result = max(result, min(citations[i], size - i));
+    }
+
+    return result;
   }
 };
 

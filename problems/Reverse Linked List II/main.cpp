@@ -27,34 +27,37 @@ struct ListNode {
 class Solution {
 public:
   ListNode* reverseBetween(ListNode* head, int left, int right) {
-    ListNode* cur = head;
-    int idx = 1;
+    int i = 1;
+    ListNode* leftNode = head;
+    ListNode* prevLeftNode = nullptr;
+    while (i != left)
+    {
+      prevLeftNode = leftNode;
+      leftNode = leftNode->next;
+      ++i;
+    }
     
-    ListNode* revHead = nullptr;
-    while (idx != left) {
-      revHead = cur;
-      cur = cur->next;
-      ++idx;
-    }
-    ListNode* revTail = cur;
-
-    ListNode* prev = nullptr;
-    while (idx != right + 1) {
-      ListNode* next = cur->next;
-      cur->next = prev;
-      prev = cur;
-      cur = next;
-      ++idx;
+    ListNode* node = leftNode;
+    ListNode* prevNode = nullptr;
+    while (i != right + 1)
+    {
+      ListNode* nextNode = node->next;
+      node->next = prevNode;
+      prevNode = node;
+      node = nextNode;
+      ++i;
     }
 
-    if (revHead) {
-      revHead->next = prev;
+    if (prevLeftNode)
+    {
+      prevLeftNode->next = prevNode;
     }
-    else {
-      head = prev;
+    else
+    {
+      head = prevNode;
     }
-    revTail->next = cur;
-    
+    leftNode->next = node;
+
     return head;
   }
 };

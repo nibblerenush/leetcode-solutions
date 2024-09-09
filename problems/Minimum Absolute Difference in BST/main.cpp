@@ -1,5 +1,7 @@
 #include <algorithm>
 #include <cmath>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <limits>
 #include <map>
@@ -25,30 +27,19 @@ struct TreeNode {
 
 class Solution {
 public:
-  bool isSymmetric(TreeNode* root) {
-    if (!root)
-    {
-      return true;
-    }
+  int getMinimumDifference(TreeNode* root) {
+    if (!root) return result;
     
-    return traversal(root->left, root->right);
+    getMinimumDifference(root->left);
+    result = min(result, abs(root->val - prevVal));
+    prevVal = root->val;
+    getMinimumDifference(root->right);
+    return result;
   }
 
-private:
-  bool traversal(TreeNode* left, TreeNode* right)
-  {
-    if (!left && !right)
-    {
-      return true;
-    }
-
-    if (!left || !right)
-    {
-      return false;
-    }
-    
-    return left->val == right->val && traversal(left->left, right->right) && traversal(left->right, right->left);
-  }
+private: 
+  int result = numeric_limits<int>::max();
+  int prevVal = numeric_limits<int>::max();
 };
 
 int main() {
